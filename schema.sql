@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS buystuff_db;
+CREATE DATABASE buystuff_db;

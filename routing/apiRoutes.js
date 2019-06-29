@@ -2,7 +2,12 @@
 var path = require('path');
 
 // Import the list of friend entries
-var friends = require('../app/data/friends.js');
+const router = require("express").Router();
+
+router.get("/api/products", async (req, res) =>
+    res.json((await db.Products.findAll({}))));
+
+router.post("/api/products", (req, res) => res.json({}));
 
 // Export API routes
 module.exports = function (app) {
@@ -54,6 +59,10 @@ module.exports = function (app) {
         friends.push(userInput);
 
         // Send appropriate response
-        res.json({ status: 'OK', matchName: matchName, matchImage: matchImage });
+        res.json({
+            status: 'OK',
+            matchName: matchName,
+            matchImage: matchImage
+        });
     });
 };
