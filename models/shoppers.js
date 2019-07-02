@@ -39,16 +39,25 @@ const Shopper = sequelize.define("Shopper",{
         }
     },
     telephone:{
-        type:DataTypes,
+        type:DataTypes.STRING,
         allowNull:false,
         validate:{
             len:[10],
             isIn: {
                 args: [/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/]}
         }
+    },
+    status:{type:DataTypes.BOOLEAN,
+        default:0
     }
 
 });
+
+Shopper.associate = function(models){
+    Shopper.hasMany = (models.Orders,{
+        onDelete:"cascade"
+    });
+}
 
 return Shopper;
 }

@@ -19,12 +19,22 @@ module.exports = function (sequelize, DataType) {
                 isIn: {
                     args: [/(^\d{5}$)|(^\d{5}-\d{4}$)/]}
             }
+        },
+        date:{
+            type:DATEONLY,
+            allowNull:false
         }
 
     });
 
     Market.associate = function(models){
         Market.hasMany(models.Products,{
+            onDelete:"cascade"
+        })
+    }
+
+    Market.associate = function(models){
+        Market.hasMany(models.Order,{
             onDelete:"cascade"
         })
     }
