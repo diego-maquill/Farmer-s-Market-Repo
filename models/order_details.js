@@ -17,6 +17,23 @@ module.exports = function(sequelize, DataTypes){
             allowNull:false
         }
 
-    }); 
+    });
+    
+    OrderDetail.associate = function(models){
+        OrderDetail.belongsTo(models.Order,{
+            foreingKey:{
+                allowNull:false
+            }
+        });
+    }
+
+    OrderDetail.associate = function(models){
+        OrderDetail.belongsTo(models.Product,{
+            foreingKey:{
+                allowNull:false
+            }
+        });
+    }
+    
     return OrderDetail;
 }

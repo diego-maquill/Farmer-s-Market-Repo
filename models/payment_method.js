@@ -23,5 +23,11 @@ module.exports=function(sequelize,DataTypes){
             default:0
         }
     });
+
+    PaymentMethod.associate = function(models){
+        PaymentMethod.belongTo(models.Customer,{
+            allowNull:false
+        });
+    }
     return PaymentMethod;
 }

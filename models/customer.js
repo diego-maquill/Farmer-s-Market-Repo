@@ -48,16 +48,33 @@ module.exports=function(sequelize,DataTypes){
             }
         },
         telephone_other:{
-            type:DataTypes,
+            type:DataTypes.STRING,
             allowNull:true,
             validate:{
                 len:[10],
                 isIn: {
                     args: [/^[(]{0,1}[0-9]{3}[)]{0,1}[-\s\.]{0,1}[0-9]{3}[-\s\.]{0,1}[0-9]{4}$/]}
             }
+        },
+        status:{
+            type:DataTypes.BOOLEAN,
+            allowNull:false,
+            default:1
         }
     
     });
+
+    Customer.associate = function(models){
+        Customer.hasMany(models.PaymentMethod,{
+            onDelete:"cascade"
+        })
+    }
+
+    Customer.associate = function(models){
+        Customer.hasMany(models.Order,{
+            onDelete:"cascade"
+        })
+    }
 
 
     
