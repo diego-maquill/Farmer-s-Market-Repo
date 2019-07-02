@@ -7,11 +7,11 @@ const app = express();
 // Configure the Express application
 var PORT = process.env.PORT || 3000;
 
-const apiRoutes = require("./routing/apiRoutes");
+const apiRoutes = require("./routing/apiGetRoutes");
 const htmlRoutes = require("./routing/htmlRoutes");
 const db = require("./models");
 
-// Expose the public directory to access CSS files
+// Expose the public directory to access front end files
 app.use(express.static(path.join(__dirname, './public')));
 
 
@@ -20,8 +20,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(bodyParser.text());
 app.use(apiRoutes)
+
 /* 
 // Add the application routes
 require(path.join(__dirname, './routing/apiRoutes'))(app);
