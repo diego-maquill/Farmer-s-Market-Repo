@@ -15,7 +15,7 @@ router.get("/api/marketProducts", async (req, res) => {
 
 //query products using id of a market
 router.get("/api/products/:marketId", async (req, res) => {
-    const marketProducts = await db.Product.findAll({ where: { marketId: req.params.marketId } },
+    const marketProducts = await db.Product.findAll({ where: { marketId: req.params.marketId }, include: [db.Farmer] },
         { order: ['deparment', 'DESC'] });
     res.json(marketProducts);
 });
@@ -32,6 +32,10 @@ router.get("api/customer/:id", async (req, res) => {
     res.json(customer);
 });
 
+router.get("api/category", async (req, res) => {
+    const category = await db.customer.findAll({});
+    res.json(category);
+});
 
 
 module.exports = router;

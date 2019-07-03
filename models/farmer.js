@@ -1,5 +1,5 @@
 module.exports = function (sequelize, DataTypes) {
-    const Shopper = sequelize.define("Shopper", {
+    const Farmer = sequelize.define("Farmer", {
         email: {
             type: DataTypes.STRING,
             allowNull: false,
@@ -56,11 +56,11 @@ module.exports = function (sequelize, DataTypes) {
 
     });
 
-    Shopper.associate = function (models) {
-        Shopper.hasMany = (models.Orders, {
+    Farmer.associate = function (models) {
+        Shopper.hasMany = (models.Product, {
             onDelete: "cascade"
         });
     }
 
-    return Shopper;
+    return Farmer;
 }
