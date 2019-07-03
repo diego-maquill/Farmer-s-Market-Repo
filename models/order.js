@@ -1,78 +1,80 @@
-module.exports = function(sequelize, DataTypes){
-    const Order = sequelize.define("Order",{
-        address:{
-            type:DataTypes.STRING,
-        allowNull:false
+module.exports = function (sequelize, DataTypes) {
+    const Order = sequelize.define("Order", {
+        address: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        city:{
-            type:DataTypes.STRING,
-            allowNull:false
+        city: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        zip:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            validate:{
-                len:[5],
+        zip: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: {
+                len: [5],
                 isIn: {
-                    args: [/(^\d{5}$)|(^\d{5}-\d{4}$)/]}
+                    args: [/(^\d{5}$)|(^\d{5}-\d{4}$)/]
+                }
             }
         },
-        credit_card:{
+        credit_card: {
             type: DataTypes.STRING,
-            allowNull:false
+            allowNull: false
         },
-        expiration_date:{
-            type:DataTypes.DATEONLY,
-            allowNull:false
+        expiration_date: {
+            type: DataTypes.DATEONLY,
+            allowNull: false
         },
-        scv:{
-            type:DataTypes.STRING,
-            allowNull:false
+        scv: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
-        total:{
-            type:DataTypes.DECIMAL,
-            allowNull:false
+        total: {
+            type: DataTypes.DECIMAL,
+            allowNull: false
         },
-        tax:{
-            type:DataTypes.DECIMAL,
-            allowNull:false,
-            default:0.0625
+        tax: {
+            type: DataTypes.DECIMAL,
+            allowNull: false,
+            default: 0.0625
         },
-        fee:{
-            type:DataTypes,
-            allowNull:false
+        fee: {
+            type: DataTypes,
+            allowNull: false
         },
-        status:{
-            type:DataTypes.STRING,
-            allowNull:false,
-            validate: {isIn:["order","ready","pick"]}
+        status: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            validate: { isIn: ["order", "ready", "pick"] }
         },
-        date_order:{
-            type:DataTypes.DATEONLY,
-            allowNull:false,
-            default:new Date()
+        date_order: {
+            type: DataTypes.DATEONLY,
+            allowNull: false,
+            default: new Date(),
+            validate: { isDate() }
         }
 
     });
 
-    Order.associate = function(models){
-        Order.hasMany(models.OrderDetail,{
-            onDelete : "cascade"
+    Order.associate = function (models) {
+        Order.hasMany(models.OrderDetail, {
+            onDelete: "cascade"
         });
     }
 
-    Order.associate = function(models){
-        Order.belongsTo(models.customer,{
-            foreingKey:{
-                allowNull:false
+    Order.associate = function (models) {
+        Order.belongsTo(models.customer, {
+            foreingKey: {
+                allowNull: false
             }
         });
     }
 
-    Order.associate = function(models){
-        Order.belongsTo(models.shopper,{
-            foreingKey:{
-                allowNull:false
+    Order.associate = function (models) {
+        Order.belongsTo(models.shopper, {
+            foreingKey: {
+                allowNull: false
             }
         });
     }
